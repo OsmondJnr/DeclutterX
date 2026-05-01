@@ -23,7 +23,7 @@ public:
         else if (ext == ".mp4" || ext == ".mkv" || ext == ".mov" || ext == ".avi") {
             return "Videos";
         }
-        else if (ext == ".mp3" || ext == ".wav" || ext == ".flac" || ext == ".aac") {
+        else if (ext == ".mp3" || ext == ".wav" || ext == ".flac" || ext == ".aac" || ext == ".ogg" || ext == ".m4a" || ext == ".opus") {
             return "Audios";
         }
         else if (ext == ".zip" || ext == ".rar" || ext == ".7z" || ext == ".tar") {
