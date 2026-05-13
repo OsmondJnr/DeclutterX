@@ -26,8 +26,7 @@
 ### 🔜 Planned Features (Coming Soon)
 - 🔍 **Dry-run mode** — preview changes before committing
 - 🔁 **Collision handling** — auto-rename duplicates instead of overwriting
-- 📝 **Custom path support** — organize any directory, not just system folders
-- 📊 **Summary report** — see a count of files moved per category
+-  **Summary report** — see a count of files moved per category
 - 🧩 **Plugin-style extension map** — add new file types via config file
 
 ---
@@ -95,12 +94,16 @@ DeclutterX.exe
 You'll be prompted to pick a directory:
 
 ```
-== File Organizer ==
+File Organizer
+Pick the directory you want to organize
 1. Desktop
 2. Downloads
 3. Documents
-Choice:
+4. Enter custom folder path
+Choose an option: _
 ```
+
+If you choose option 4, simply enter the full path to any folder you want to organize. The tool will validate that the path exists and is a directory before proceeding.
 
 ---
 
