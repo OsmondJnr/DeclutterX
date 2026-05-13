@@ -100,26 +100,50 @@ int main() {
     cout << "1. Desktop\n";
     cout << "2. Downloads\n";
     cout << "3. Documents\n";
+    cout << "4. Enter custom folder path\n";
     cout << "Choose an option: ";
     cin >> choice;
+    cin.ignore(); // Clear the input buffer
 
-    const char* envVar;
-    #ifdef _WIN32
-        envVar = getenv("USERPROFILE");
-    #else
-        envVar = getenv("HOME");
-    #endif
+    fs::path basePath;
 
-    if (!envVar) {
-        cout << "Could not determine home directory." << endl;
-        return 1;
+    if (choice == 1 || choice == 2 || choice == 3) {
+        const char* envVar;
+        #ifdef _WIN32
+            envVar = getenv("USERPROFILE");
+        #else
+            envVar = getenv("HOME");
+        #endif
+
+        if (!envVar) {
+            cout << "Could not determine home directory." << endl;
+            return 1;
+        }
+
+        basePath = fs::path(envVar);
+
+        if (choice == 1) basePath /= "Desktop";
+        else if (choice == 2) basePath /= "Downloads";
+        else if (choice == 3) basePath /= "Documents";
     }
-
-    fs::path basePath(envVar);
-
-    if (choice == 1) basePath /= "Desktop";
-    else if (choice == 2) basePath /= "Downloads";
-    else if (choice == 3) basePath /= "Documents";
+    else if (choice == 4) {
+        string customPath;
+        cout << "Enter the folder path: ";
+        getline(cin, customPath);
+        
+        basePath = fs::path(customPath);
+        
+        // Validate the path exists and is a directory
+        if (!fs::exists(basePath)) {
+            cout << "Error: The path does not exist." << endl;
+            return 1;
+        }
+        
+        if (!fs::is_directory(basePath)) {
+            cout << "Error: The path is not a directory." << endl;
+            return 1;
+        }
+    }
     else {
         cout << "Invalid choice" << endl;
         return 1;
